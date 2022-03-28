@@ -9,11 +9,11 @@ namespace XmlPrac
     public class Program
     {
         //TODO:
+        //Добавить меню для консольного мода
         //Разнести всё по частичным классам
         //Динамическая подгрузка файлов
         //Сохранение уже открытых соревнований
         //Начать работу над гуишкой
-
 
         private const string _FILE = @"C:\Users\Пользователь\Documents\Ski123\Events\20220325_BT_MRCAB.xml";
 
@@ -42,6 +42,8 @@ namespace XmlPrac
             var allRacersInRaces = FillRace(xDoc,persons,races);
 
             CheckErrors(allRacersInRaces);
+
+            Console.ReadLine();
             
         }
 
