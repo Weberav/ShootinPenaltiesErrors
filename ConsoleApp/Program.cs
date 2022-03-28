@@ -9,8 +9,8 @@ namespace XmlPrac
     public class Program
     {
         //TODO:
-        ////Разнести всё по частичным классам
-        ///Динамическая подгрузка файлов
+        //Разнести всё по частичным классам
+        //Динамическая подгрузка файлов
         //Сохранение уже открытых соревнований
         //Начать работу над гуишкой
 
@@ -32,11 +32,14 @@ namespace XmlPrac
             //Все участники
             var persons = GetListOfPersons(xDoc);
 
+            //Все гонки
+            var races = GetListOfRaces(xDoc);
+
             //Все категории
             var categories = GetCategoryList(xDoc);
 
             //Заполнение гонки участниками
-            var allRacersInRaces = FillRace(xDoc,persons);
+            var allRacersInRaces = FillRace(xDoc,persons,races);
 
             CheckErrors(allRacersInRaces);
             
@@ -71,6 +74,8 @@ namespace XmlPrac
         /// <param name="categories"></param>
         private static void SortingByCategory(List<Person> personsWithShootings,List<Category> categories)
         {
+            //TODO: Применение для ГУИ
+
             var category = categories[2];
 
             var x = personsWithShootings.Where(x => x.ClassId == category.Name);
@@ -80,13 +85,11 @@ namespace XmlPrac
         /// <summary>
         /// Заполнить гонки участниками cоответственно категориям
         /// </summary>
-        public static Dictionary<string, List<Person>> FillRace(XmlDocument xDoc,List<Person> persons)
+        public static Dictionary<string, List<Person>> FillRace(XmlDocument xDoc,List<Person> persons,List<Race> races)
         {
             xDoc.Load(_FILE);
 
             XmlElement? xRoot = xDoc.DocumentElement;
-
-            var races = GetListOfRaces(xDoc);
 
             var uniqueRaces = races.Select(x => x.Name).Distinct().ToList();
 
@@ -200,7 +203,7 @@ namespace XmlPrac
 
                                 if(shootingString.Length == 0)
                                 {
-                                    shootingString = "<No Shootings>";
+                                    currPerson.Shootings = "<No Shootings>";
                                 }
 
                             }
@@ -212,7 +215,7 @@ namespace XmlPrac
 
                                 if (penaltyString.Length == 0)
                                 {
-                                    penaltyString = "<No PenaltyLoops";
+                                    currPerson.PenaltyLaps = "<No PenaltyLoops";
                                 }
 
                             }
