@@ -15,7 +15,7 @@ namespace XmlPrac
         //Начать работу над гуишкой
 
 
-        private const string FILE = @"C:\Users\Пользователь\Documents\Ski123\Events\20220325_BT_MRCAB.xml";
+        private const string _FILE = @"C:\Users\Пользователь\Documents\Ski123\Events\20220325_BT_MRCAB.xml";
 
         static void Main(string[] args)
         {
@@ -82,7 +82,7 @@ namespace XmlPrac
         /// </summary>
         public static Dictionary<string, List<Person>> FillRace(XmlDocument xDoc,List<Person> persons)
         {
-            xDoc.Load(FILE);
+            xDoc.Load(_FILE);
 
             XmlElement? xRoot = xDoc.DocumentElement;
 
@@ -169,7 +169,7 @@ namespace XmlPrac
         /// <returns></returns>
         private static List<Person> PersonsWithShootings(XmlDocument xDoc,List<Person> persons)
         {
-            xDoc.Load(FILE);
+            xDoc.Load(_FILE);
 
             XmlElement? xRoot = xDoc.DocumentElement;
 
@@ -231,7 +231,7 @@ namespace XmlPrac
         /// <returns></returns>
         static List<Race> GetListOfRaces(XmlDocument xmlDoc)
         {
-            xmlDoc.Load(FILE);
+            xmlDoc.Load(_FILE);
 
             XmlElement? xRoot = xmlDoc.DocumentElement;
 
@@ -269,7 +269,7 @@ namespace XmlPrac
         /// <returns></returns>
         static List<Category> GetCategoryList(XmlDocument xmlDoc)
         {
-            xmlDoc.Load(FILE);
+            xmlDoc.Load(_FILE);
 
             XmlElement? xRoot = xmlDoc.DocumentElement;
 
@@ -314,7 +314,7 @@ namespace XmlPrac
         /// <returns></returns>
         static List<Person> GetListOfPersons(XmlDocument xmlDoc)
         {
-            xmlDoc.Load(FILE);
+            xmlDoc.Load(_FILE);
 
             XmlElement? xRoot = xmlDoc.DocumentElement;
 
