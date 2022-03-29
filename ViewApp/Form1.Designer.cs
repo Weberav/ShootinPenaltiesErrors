@@ -28,71 +28,62 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dgv_PersonList = new System.Windows.Forms.DataGridView();
+            this.btn_LoadFile = new System.Windows.Forms.Button();
+            this.btn_OneTwoThree = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_PersonList)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgv_PersonList
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(19, 78);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(726, 393);
-            this.dataGridView1.TabIndex = 0;
+            this.dgv_PersonList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_PersonList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_PersonList.Location = new System.Drawing.Point(19, 78);
+            this.dgv_PersonList.Name = "dgv_PersonList";
+            this.dgv_PersonList.RowTemplate.Height = 25;
+            this.dgv_PersonList.Size = new System.Drawing.Size(726, 393);
+            this.dgv_PersonList.TabIndex = 0;
             // 
-            // button1
+            // btn_LoadFile
             // 
-            this.button1.Location = new System.Drawing.Point(19, 494);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(212, 58);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_LoadFile.Location = new System.Drawing.Point(19, 12);
+            this.btn_LoadFile.Name = "btn_LoadFile";
+            this.btn_LoadFile.Size = new System.Drawing.Size(212, 58);
+            this.btn_LoadFile.TabIndex = 1;
+            this.btn_LoadFile.Text = "Загрузить файл";
+            this.btn_LoadFile.UseVisualStyleBackColor = true;
+            this.btn_LoadFile.Click += new System.EventHandler(this.btn_LoadFile_Click);
             // 
-            // button2
+            // btn_OneTwoThree
             // 
-            this.button2.Location = new System.Drawing.Point(271, 494);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(212, 58);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button1";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(533, 494);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(212, 58);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "button1";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_OneTwoThree.Location = new System.Drawing.Point(286, 15);
+            this.btn_OneTwoThree.Name = "btn_OneTwoThree";
+            this.btn_OneTwoThree.Size = new System.Drawing.Size(241, 55);
+            this.btn_OneTwoThree.TabIndex = 2;
+            this.btn_OneTwoThree.Text = "123";
+            this.btn_OneTwoThree.UseVisualStyleBackColor = true;
+            this.btn_OneTwoThree.Click += new System.EventHandler(this.btn_OneTwoThree_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(968, 590);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.btn_OneTwoThree);
+            this.Controls.Add(this.btn_LoadFile);
+            this.Controls.Add(this.dgv_PersonList);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_PersonList)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataGridView dgv_PersonList;
+        private System.Windows.Forms.Button btn_LoadFile;
+        private System.Windows.Forms.Button btn_OneTwoThree;
     }
 }
