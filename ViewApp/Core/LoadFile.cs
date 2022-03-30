@@ -8,7 +8,7 @@ namespace ViewApp.Core
 {
     partial class XmlModule
     {
-        public static string LoadFile() 
+        public (string,XmlDocument) LoadFile() 
         {
             string filePath = string.Empty;
             string fileContent = string.Empty;
@@ -26,12 +26,12 @@ namespace ViewApp.Core
 
                     MessageBox.Show(filePath);
 
-                    return filePath;
+                    return (filePath,new XmlDocument());
                 }
 
                 filePath = "";
 
-                return filePath;
+                return (filePath,null);
             }
         }
     }

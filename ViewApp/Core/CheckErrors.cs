@@ -16,22 +16,24 @@ namespace ViewApp.Core
         /// Вывод в консоль всех участников с ошибками
         /// </summary>
         /// <param name="allRacersInRaces"></param>
-        public static void CheckErrors(Dictionary<string, List<Person>> allRacersInRaces)
+        public List<Person> CheckErrors(Dictionary<string, List<Person>> allRacersInRaces)
         {
-            List<Person> x = new List<Person>();
+            List<Person> ErrorPersonList = new List<Person>();
 
             foreach (var key in allRacersInRaces)
             {
-                Console.WriteLine(key.Key);
+                //Console.WriteLine(key.Key);
 
-                Console.WriteLine(key.Value.Where(x => x.Shootings.Length > x.PenaltyLaps.Length).ToList().Count);
+                //Console.WriteLine(key.Value.Where(x => x.Shootings.Length > x.PenaltyLaps.Length).ToList().Count);
 
-                foreach (var z in key.Value.Where(x => x.Shootings.Length > x.PenaltyLaps.Length).ToList())
+                foreach (var PersonWithErrors in key.Value.Where(x => x.Shootings.Length > x.PenaltyLaps.Length || x.Shootings.Length < x.PenaltyLaps.Length).ToList())
                 {
-                    Console.WriteLine(z);
+                    ErrorPersonList.Add(PersonWithErrors);
                 }
 
             }
+
+            return ErrorPersonList ?? new List<Person>();
         }
     }
 }

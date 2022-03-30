@@ -16,8 +16,10 @@ namespace XmlPrac
             MainMenu main = new MainMenu();
             main.Welcome();
 
-            
-            XmlModule.CheckErrors(XmlModule.allRacersInRaces);
+            var persons = XmlModule.GetListOfPersons(new System.Xml.XmlDocument());
+            var races = XmlModule.GetListOfRaces(new System.Xml.XmlDocument());
+
+            XmlModule.FillRace(new System.Xml.XmlDocument(), persons, races);
 
         }
 

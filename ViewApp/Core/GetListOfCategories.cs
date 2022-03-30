@@ -11,9 +11,9 @@ namespace ViewApp.Core
 {
     partial class XmlModule
     {
-        public static List<Category> GetCategoryList(XmlDocument xmlDoc)
+        public List<Category> GetCategoryList(XmlDocument xmlDoc)
         {
-            xmlDoc.Load(filePath);
+            xmlDoc.Load(filepath);
 
             XmlElement? xRoot = xmlDoc.DocumentElement;
 

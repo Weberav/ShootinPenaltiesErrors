@@ -11,9 +11,9 @@ namespace ViewApp.Core
 {
     partial class XmlModule
     {
-        public static List<Person> GetListOfPersons(XmlDocument xmlDoc)
+        public List<Person> GetListOfPersons(XmlDocument xmlDoc)
         {
-            xmlDoc.Load(filePath);
+            xmlDoc.Load(filepath);
 
             XmlElement? xRoot = xmlDoc.DocumentElement;
 

@@ -35,12 +35,12 @@ namespace ConsoleApp.Core
                 }
             }
 
-            //foreach(var item in racesNames)
+            //foreach (var item in racesNames)
             //{
             //    Console.WriteLine(item);
             //}
 
-            return racesNames ?? new List<Race>();
+            return racesNames.Distinct().ToList() ?? new List<Race>();
         }
     }
 }

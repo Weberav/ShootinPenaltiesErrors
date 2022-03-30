@@ -11,7 +11,7 @@ namespace ConsoleApp.Core
 {
     public partial class XmlModule
     {
-        public static string _FILE = @"C:\Users\alpen\Source\Repos\RxNsx\ShootinPenaltiesErrors\ConsoleApp\Files\20220325_BT_MRCAB.xml";
+        public static string _FILE = @"C:\Users\Пользователь\Documents\Ski123\Events\20220325_BT_MRCAB.xml";
 
         //private XmlDocument xDoc = new XmlDocument();
 

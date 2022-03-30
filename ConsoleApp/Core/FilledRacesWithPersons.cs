@@ -74,17 +74,17 @@ namespace ConsoleApp.Core
 
             Console.WriteLine(racesdict.Count + "Окончательное значнеие пар");
 
-            //foreach (var c in racesdict)
-            //{
-            //    Console.WriteLine(c.Key);
+            foreach (var c in racesdict)
+            {
+                Console.WriteLine(c.Key);
 
-            //    Console.WriteLine($"Количество человек в группе {c.Value.Count}");
+                Console.WriteLine($"Количество человек в группе {c.Value.Count}");
 
-            //    foreach (var v in c.Value)
-            //    {
-            //        Console.WriteLine(v);
-            //    }
-            //}
+                foreach (var v in c.Value)
+                {
+                    Console.WriteLine(v);
+                }
+            }
 
             return racesdict ?? new Dictionary<string, List<Person>>();
         }

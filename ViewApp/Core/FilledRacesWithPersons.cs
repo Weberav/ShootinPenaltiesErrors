@@ -11,9 +11,9 @@ namespace ViewApp.Core
 {
     partial class XmlModule
     {
-        public static Dictionary<string, List<Person>> FillRace(XmlDocument xDoc, List<Person> persons, List<Race> races)
+        public Dictionary<string, List<Person>> FillRace(XmlDocument xDoc, List<Person> persons, List<Race> races)
         {
-            xDoc.Load(filePath);
+            xDoc.Load(filepath);
 
             XmlElement? xRoot = xDoc.DocumentElement;
 
@@ -25,9 +25,6 @@ namespace ViewApp.Core
             {
                 racesdict.Add(uniqueRaces[i], new List<Person>());
             }
-
-            Console.WriteLine(racesdict.Count + " Количество пар");
-
 
             if (xRoot != null)
             {
@@ -73,7 +70,7 @@ namespace ViewApp.Core
                 }
             }
 
-            Console.WriteLine(racesdict.Count + "Окончательное значнеие пар");
+            //Console.WriteLine(racesdict.Count + "Окончательное значнеие пар");
 
             //foreach (var c in racesdict)
             //{

@@ -10,8 +10,6 @@ namespace ViewApp.Models
     { 
         public string Name { get;  }
 
-        public List<Person> Participants { get; set; }
-
         public Race(string name)
         {
             //TODO: Проверка

@@ -11,9 +11,9 @@ namespace ViewApp.Core
 {
     partial class XmlModule
     {
-        public static List<Race> GetListOfRaces(XmlDocument xmlDoc)
+        public List<Race> GetListOfRaces(XmlDocument xmlDoc)
         {
-            xmlDoc.Load(filePath);
+            xmlDoc.Load(filepath);
 
             XmlElement? xRoot = xmlDoc.DocumentElement;
 
@@ -35,11 +35,6 @@ namespace ViewApp.Core
                     }
                 }
             }
-
-            //foreach(var item in racesNames)
-            //{
-            //    Console.WriteLine(item);
-            //}
 
             return racesNames ?? new List<Race>();
         }
