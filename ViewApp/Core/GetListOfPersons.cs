@@ -49,9 +49,17 @@ namespace ViewApp.Core
                             {
                                 person.ClassId = childNode.InnerText;
                             }
+                            if (childNode.Name == "IsTeam")
+                            {
+                                person.IsTeam = childNode.InnerText;
+                            }
                         }
 
-                        persons.Add(person);
+                        if(person.IsTeam == "false")
+                        {
+                            persons.Add(person);
+                        }
+                        
                     }
                 }
             }

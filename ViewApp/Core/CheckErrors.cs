@@ -23,9 +23,12 @@ namespace ViewApp.Core
             //Проверка спортсменов если количество стрельб отличается от количества вхождений на штрафной круг или наоборот
             foreach (var key in allRacersInRaces)
             {
-                foreach (var PersonWithErrors in key.Value.Where(x => x.Shootings.Length > x.PenaltyLaps.Length || x.Shootings.Length < x.PenaltyLaps.Length).ToList())
+                if(key.Value != null)
                 {
-                    ErrorPersonList.Add(PersonWithErrors);
+                    foreach (var PersonWithErrors in key.Value.Where(x => x.Shootings.Length > x.PenaltyLaps.Length || x.Shootings.Length < x.PenaltyLaps.Length).ToList())
+                    {
+                        ErrorPersonList.Add(PersonWithErrors);
+                    }
                 }
             }
 

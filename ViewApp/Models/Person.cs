@@ -15,7 +15,7 @@ namespace ViewApp.Models
         public string Name { get; set; }
         public string LastName { get; set; }
         public string ClassId { get; set; }
-
+        public string IsTeam { get; set; }
         //public string NOC { get; set; }
         //public string Region { get; set; }
         //public int Year { get; set; }

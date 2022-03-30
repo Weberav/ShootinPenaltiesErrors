@@ -34,6 +34,7 @@
             this.dgv_RacesList = new System.Windows.Forms.DataGridView();
             this.RacesLabel = new System.Windows.Forms.Label();
             this.PersonsLabel = new System.Windows.Forms.Label();
+            this.Rb_IsRelay = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_PersonList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_RacesList)).BeginInit();
             this.SuspendLayout();
@@ -102,11 +103,24 @@
             this.PersonsLabel.TabIndex = 4;
             this.PersonsLabel.Text = "Участники";
             // 
+            // Rb_IsRelay
+            // 
+            this.Rb_IsRelay.AutoCheck = false;
+            this.Rb_IsRelay.AutoSize = true;
+            this.Rb_IsRelay.Location = new System.Drawing.Point(668, 544);
+            this.Rb_IsRelay.Name = "Rb_IsRelay";
+            this.Rb_IsRelay.Size = new System.Drawing.Size(75, 19);
+            this.Rb_IsRelay.TabIndex = 5;
+            this.Rb_IsRelay.Text = "Эстафета";
+            this.Rb_IsRelay.UseVisualStyleBackColor = true;
+            this.Rb_IsRelay.Click += new System.EventHandler(this.Rb_IsRelay_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1180, 590);
+            this.Controls.Add(this.Rb_IsRelay);
             this.Controls.Add(this.PersonsLabel);
             this.Controls.Add(this.RacesLabel);
             this.Controls.Add(this.dgv_RacesList);
@@ -133,5 +147,6 @@
         private System.Windows.Forms.DataGridView dgv_RacesList;
         private System.Windows.Forms.Label RacesLabel;
         private System.Windows.Forms.Label PersonsLabel;
+        private System.Windows.Forms.RadioButton Rb_IsRelay;
     }
 }
