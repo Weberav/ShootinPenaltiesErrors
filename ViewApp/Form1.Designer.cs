@@ -113,7 +113,7 @@
             this.Rb_IsRelay.TabIndex = 5;
             this.Rb_IsRelay.Text = "Эстафета";
             this.Rb_IsRelay.UseVisualStyleBackColor = true;
-            this.Rb_IsRelay.Click += new System.EventHandler(this.Rb_IsRelay_Click_1);
+            this.Rb_IsRelay.Click += new System.EventHandler(this.btn_СheckErrors_Click);
             // 
             // Form1
             // 
