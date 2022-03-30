@@ -15,15 +15,15 @@ namespace ViewApp
 {
     public partial class Form1 : Form
     {
-        private static string? _filePath;
+        private static string? _filePath = string.Empty;
         private static XmlDocument? _xDoc;
 
-        public List<Person> Persons { get; set; }
-        public List<Race> Races { get; set; }
-        public List<string> UniqueRaces { get; set; }
-        public List<Category> Categories { get; set; }
-        public Dictionary<string,List<Person>> PersonsByRace { get; set; }
-        public List<Person> PersonsWithErorrs { get; set; }
+        public List<Person>? Persons { get; set; }
+        public List<Race>? Races { get; set; }
+        public List<string>? UniqueRaces { get; set; }
+        public List<Category>? Categories { get; set; }
+        public Dictionary<string,List<Person>>? PersonsByRace { get; set; }
+        public List<Person>? PersonsWithErorrs { get; set; }
 
         XmlModule xmlModule = new XmlModule();
 
@@ -68,7 +68,7 @@ namespace ViewApp
 
             dgv_PersonList.RowHeadersVisible = false;
 
-            dgv_PersonList.Columns["Id"].HeaderText = "Id";
+            dgv_PersonList.Columns["Bib"].HeaderText = "Bib";
             dgv_PersonList.Columns["LastName"].HeaderText = "Фамилия";
             dgv_PersonList.Columns["Name"].HeaderText = "Отчество";
             dgv_PersonList.Columns["ClassId"].HeaderText = "Категория";
@@ -110,6 +110,12 @@ namespace ViewApp
         {
             PersonsWithErorrs = xmlModule.CheckErrors(PersonsByRace);
             DisplayPersonsWithErrors();
+            DisplayRacesWithErrors();
+        }
+
+        private void DisplayRacesWithErrors()
+        {
+            
         }
     }
 }

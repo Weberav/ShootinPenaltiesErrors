@@ -49,6 +49,10 @@ namespace ViewApp.Core
                                 //Ищем пользователя с таким же айдишником
                                 currentPerson = persons.FirstOrDefault(x => x.Id == childNode.InnerText);
                             }
+                            if (childNode.Name == "Bib")
+                            {
+                                currentPerson.Bib = int.Parse(childNode.InnerText);
+                            }
                             if (childNode.Name == "Shooting")
                             {
                                 currentPerson.Shootings = childNode.InnerText;

@@ -33,6 +33,10 @@ namespace ViewApp.Core
                             {
                                 person.Id = childNode.InnerText;
                             }
+                            if(childNode.Name == "Bib")
+                            {
+                                person.Bib = int.Parse(childNode.InnerText);
+                            }
                             if (childNode.Name == "FamilyName")
                             {
                                 person.LastName = childNode.InnerText;

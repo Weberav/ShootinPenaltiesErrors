@@ -41,6 +41,7 @@
             // dgv_PersonList
             // 
             this.dgv_PersonList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_PersonList.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgv_PersonList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgv_PersonList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_PersonList.Location = new System.Drawing.Point(302, 84);
@@ -51,27 +52,30 @@
             // 
             // btn_LoadFile
             // 
+            this.btn_LoadFile.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btn_LoadFile.Location = new System.Drawing.Point(19, 32);
             this.btn_LoadFile.Name = "btn_LoadFile";
             this.btn_LoadFile.Size = new System.Drawing.Size(202, 32);
             this.btn_LoadFile.TabIndex = 1;
             this.btn_LoadFile.Text = "Загрузить файл";
-            this.btn_LoadFile.UseVisualStyleBackColor = true;
+            this.btn_LoadFile.UseVisualStyleBackColor = false;
             this.btn_LoadFile.Click += new System.EventHandler(this.btn_LoadFile_Click);
             // 
             // btn_СheckErrors
             // 
+            this.btn_СheckErrors.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.btn_СheckErrors.Location = new System.Drawing.Point(589, 483);
             this.btn_СheckErrors.Name = "btn_СheckErrors";
             this.btn_СheckErrors.Size = new System.Drawing.Size(241, 55);
             this.btn_СheckErrors.TabIndex = 2;
             this.btn_СheckErrors.Text = "Проверить на ошибки";
-            this.btn_СheckErrors.UseVisualStyleBackColor = true;
+            this.btn_СheckErrors.UseVisualStyleBackColor = false;
             this.btn_СheckErrors.Click += new System.EventHandler(this.btn_СheckErrors_Click);
             // 
             // dgv_RacesList
             // 
             this.dgv_RacesList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_RacesList.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgv_RacesList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgv_RacesList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_RacesList.Location = new System.Drawing.Point(19, 84);
@@ -101,6 +105,7 @@
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1180, 590);
             this.Controls.Add(this.PersonsLabel);
             this.Controls.Add(this.RacesLabel);
@@ -111,7 +116,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "PenaltyShootingControl v1.0";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_PersonList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_RacesList)).EndInit();
