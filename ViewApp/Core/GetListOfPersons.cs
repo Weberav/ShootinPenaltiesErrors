@@ -55,6 +55,7 @@ namespace ViewApp.Core
                             }
                         }
 
+                        //Если поле команды отрицательное, то добавляется человек
                         if(person.IsTeam == "false")
                         {
                             persons.Add(person);

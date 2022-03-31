@@ -26,51 +26,91 @@ namespace ViewApp.Core
                 racesdict.Add(uniqueRaces[i], new List<Person>());
             }
 
+            //Ребята с эстафеты
+            List<Person> LegResultPersons = new List<Person>();
+            //Список айдишников эстафетных
+            List<string> IdsOfPersonInLegs = new List<string>();
+
+
             if (xRoot != null)
             {
                 foreach (XmlElement xNode in xRoot)
                 {
                     if (xNode.Name == "Results")
                     {
-                        Person currentPerson = new Person();
+                        Person? currentPerson = new Person();
                         string raceId = string.Empty;
+                        string id = string.Empty;
+                        int bib = 0;
                         string shootings = string.Empty;
                         string penalties = string.Empty;
 
 
                         foreach (XmlElement childNode in xNode.ChildNodes)
                         {
+
+                            //Обработка гонки
                             if (childNode.Name == "RaceId")
                             {
-                                raceId = childNode.InnerText;
+                                if(childNode.InnerText.Contains("BTRelay"))
+                                {
+                                    raceId = childNode.InnerText;
+
+                                    LegResultPersons = GetLegResults(xDoc, persons);
+
+                                    IdsOfPersonInLegs = LegResultPersons.Select(x => x.Id).Distinct().ToList();
+
+                                    foreach(var personId in IdsOfPersonInLegs)
+                                    {
+                                        var personToAdd = persons.FirstOrDefault(x => x.Id == personId);
+                                        var raceToAdd = racesdict.FirstOrDefault(x => x.Key == raceId);
+
+                                        if(personToAdd != null)
+                                        {
+                                            raceToAdd.Value.Add(personToAdd);
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    raceId = childNode.InnerText;
+                                }
                             }
+
                             if (childNode.Name == "Id")
                             {
-                                //Ищем пользователя с таким же айдишником
-                                currentPerson = persons.FirstOrDefault(x => x.Id == childNode.InnerText);
+                                id = childNode.InnerText;
                             }
                             if (childNode.Name == "Bib")
                             {
-                                currentPerson.Bib = int.Parse(childNode.InnerText);
+                                bib = int.Parse(childNode.InnerText);
                             }
                             if (childNode.Name == "Shooting")
                             {
-                                currentPerson.Shootings = childNode.InnerText;
+                                shootings = childNode.InnerText;
                             }
                             if (childNode.Name == "PenaltyLaps")
                             {
-                                currentPerson.PenaltyLaps = childNode.InnerText;
+                                penalties = childNode.InnerText;
                             }
+
                         }
 
                         //Находим нужную нам гонку
                         var x = racesdict.FirstOrDefault(x => x.Key == raceId);
 
-                        x.Value.Add(currentPerson);
+                        //Находим нужного нам спортсмена
+                        currentPerson = persons.FirstOrDefault(x => x.Id == id);
 
+                        if(currentPerson != null)
+                        {
+                            currentPerson.Bib = bib;
+                            currentPerson.Shootings = shootings;
+                            currentPerson.PenaltyLaps = penalties;
+
+                            x.Value.Add(currentPerson);
+                        }
                     }
-
-
                 }
             }
 
