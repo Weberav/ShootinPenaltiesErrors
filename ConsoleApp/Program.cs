@@ -1,4 +1,5 @@
 ﻿using ConsoleApp.Core;
+using System;
 
 namespace XmlPrac
 {
@@ -13,15 +14,27 @@ namespace XmlPrac
 
         static void Main(string[] args)
         {
-            MainMenu main = new MainMenu();
-            main.Welcome();
+            //MainMenu main = new MainMenu();
+            //main.Welcome();
 
-            var persons = XmlModule.GetListOfPersons(new System.Xml.XmlDocument());
-            var races = XmlModule.GetListOfRaces(new System.Xml.XmlDocument());
+            //var persons = XmlModule.GetListOfPersons(new System.Xml.XmlDocument());
+            //var races = XmlModule.GetListOfRaces(new System.Xml.XmlDocument());
 
-            XmlModule.FillRace(new System.Xml.XmlDocument(), persons, races);
+            //XmlModule.FillRace(new System.Xml.XmlDocument(), persons, races);
 
+
+            testc();
+
+            int x = +1;
+
+            
         }
 
+        private static void testc()
+        {
+            int x = 100;
+
+            Console.WriteLine(x);
+        }
     }
 }

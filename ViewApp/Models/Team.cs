@@ -8,6 +8,8 @@ namespace ViewApp.Models
 {
     public class Team
     {
+        public string Id { get; set; }
         public string Name { get; set; }
+        public string ClassId { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace ViewApp
         private static XmlDocument? _xDoc;
 
         public List<Person>? Persons { get; set; }
+        public List<Team>? Teams { get; set; }
         public List<Race>? Races { get; set; }
         public List<string>? UniqueRaces { get; set; }
         public List<Category>? Categories { get; set; }
@@ -31,7 +32,11 @@ namespace ViewApp
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Загрузка файла
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_LoadFile_Click(object sender, EventArgs e)
         {
             //Возвращаем строку в которой находится файл
@@ -39,18 +44,23 @@ namespace ViewApp
             //Присваиваем ссылку на файл с которым работаем
             xmlModule.filepath = _filePath;
 
-            //Получаем челиков
-            Persons = xmlModule.GetListOfPersons(_xDoc);
+            //Получаем челиков команды и гонки
+            (Persons,Teams) = xmlModule.GetListOfPersons(_xDoc);
             Races = xmlModule.GetListOfRaces(_xDoc);
             PersonsByRace = xmlModule.FillRace(_xDoc, Persons, Races);
 
             //Получаем уникальные названия гонок
             UniqueRaces = Races.Select(x => x.Name).Distinct().ToList();
 
-            DisplayPersons();
-            DisplayRaces();
-        }
+            
 
+            DisplayRaces();
+            DisplayTeams();
+            DisplayPersons();
+        }
+        /// <summary>
+        /// Отображение гонок
+        /// </summary>
         private void DisplayRaces()
         {
             dgv_RacesList.RowHeadersVisible = false;
@@ -58,7 +68,24 @@ namespace ViewApp
 
             dgv_RacesList.ClearSelection();
         }
+        /// <summary>
+        /// Отображение команд
+        /// </summary>
+        private void DisplayTeams()
+        {
+            var bindingList = new BindingList<Team>(Teams);
+            BindingSource source = new BindingSource(bindingList, null);
+            dgv_TeamsList.DataSource = source;
 
+            dgv_TeamsList.RowHeadersVisible = false;
+
+            dgv_TeamsList.Columns["Id"].Visible = false;
+
+
+        }
+        /// <summary>
+        /// Отображение участников
+        /// </summary>
         private void DisplayPersons()
         {
             //Привязка данных к DGV
@@ -68,11 +95,16 @@ namespace ViewApp
 
             dgv_PersonList.RowHeadersVisible = false;
 
+
+            dgv_PersonList.Columns["Id"].Visible = false;
+            dgv_PersonList.Columns["TeamId"].Visible = false;
+            dgv_PersonList.Columns["IsTeam"].Visible = false;
+
             dgv_PersonList.Columns["Bib"].HeaderText = "Bib";
             dgv_PersonList.Columns["LastName"].HeaderText = "Фамилия";
-            dgv_PersonList.Columns["Name"].HeaderText = "Отчество";
+            dgv_PersonList.Columns["Name"].HeaderText = "Имя";
             dgv_PersonList.Columns["ClassId"].HeaderText = "Категория";
-            dgv_PersonList.Columns["Shootings"].HeaderText = "Промахов";
+            dgv_PersonList.Columns["Shootings"].HeaderText = "Промахи";
             dgv_PersonList.Columns["PenaltyLaps"].HeaderText = "Штрафные";
 
             dgv_PersonList.Columns["Shootings"].Visible = false;
@@ -80,12 +112,9 @@ namespace ViewApp
 
             dgv_PersonList.ClearSelection();
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
+        /// <summary>
+        /// Показывает список с ошибками
+        /// </summary>
         private void DisplayPersonsWithErrors()
         {
             var bindingList = new BindingList<Person>(PersonsWithErorrs);
@@ -94,18 +123,27 @@ namespace ViewApp
 
             dgv_PersonList.RowHeadersVisible = false;
 
+            dgv_PersonList.Columns["Id"].Visible = false;
+            dgv_PersonList.Columns["TeamId"].Visible = false;
+            dgv_PersonList.Columns["IsTeam"].Visible = false;
+
             dgv_PersonList.Columns["Id"].HeaderText = "Id";
             dgv_PersonList.Columns["LastName"].HeaderText = "Фамилия";
-            dgv_PersonList.Columns["Name"].HeaderText = "Отчество";
+            dgv_PersonList.Columns["Name"].HeaderText = "Имя";
             dgv_PersonList.Columns["ClassId"].HeaderText = "Категория";
-            dgv_PersonList.Columns["Shootings"].HeaderText = "Промахов";
+            dgv_PersonList.Columns["Shootings"].HeaderText = "Промахи";
             dgv_PersonList.Columns["PenaltyLaps"].HeaderText = "Штрафные";
             dgv_PersonList.Columns["Shootings"].Visible = true;
             dgv_PersonList.Columns["PenaltyLaps"].Visible = true;
 
             dgv_PersonList.ClearSelection();
         }
-
+        
+        /// <summary>
+        /// Кнопка которая проверяет ошибки и отдает в ДГВ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_СheckErrors_Click(object sender, EventArgs e)
         {
             PersonsWithErorrs = xmlModule.CheckErrors(PersonsByRace);
@@ -116,6 +154,16 @@ namespace ViewApp
         private void DisplayRacesWithErrors()
         {
             
+        }
+
+        /// <summary>
+        /// Загрузка формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
