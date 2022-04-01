@@ -11,7 +11,7 @@ namespace ViewApp.Core
 {
     partial class XmlModule
     {
-        public Dictionary<string, List<Person>> FillRace(XmlDocument xDoc, List<Person> persons, List<Race> races)
+        public Dictionary<string, List<Person>> FillRace(XmlDocument xDoc, List<Person> persons, List<Race> races, List<Team> teams)
         {
             xDoc.Load(filepath);
 
@@ -28,6 +28,7 @@ namespace ViewApp.Core
 
             //Ребята с эстафеты
             List<Person> LegResultPersons = new List<Person>();
+            List<Team> FilledTeamsWithLegPersons = new List<Team>();
             //Список айдишников эстафетных
             List<string> IdsOfPersonInLegs = new List<string>();
 
@@ -56,7 +57,8 @@ namespace ViewApp.Core
                                 {
                                     raceId = childNode.InnerText;
 
-                                    LegResultPersons = GetLegResults(xDoc, persons);
+                                    //Получаем заполненные гонки ребятами и заполненные команды для эстафет
+                                    (LegResultPersons,FilledTeamsWithLegPersons) = GetLegResults(xDoc, persons,teams);
 
                                     IdsOfPersonInLegs = LegResultPersons.Select(x => x.Id).Distinct().ToList();
 
@@ -99,7 +101,7 @@ namespace ViewApp.Core
                         //Находим нужную нам гонку
                         var x = racesdict.FirstOrDefault(x => x.Key == raceId);
 
-                        //Находим нужного нам спортсмена
+                        //Находим нужного нам спортсмена для добалвения в гонку
                         currentPerson = persons.FirstOrDefault(x => x.Id == id);
 
                         if(currentPerson != null)
@@ -113,20 +115,6 @@ namespace ViewApp.Core
                     }
                 }
             }
-
-            //Console.WriteLine(racesdict.Count + "Окончательное значнеие пар");
-
-            //foreach (var c in racesdict)
-            //{
-            //    Console.WriteLine(c.Key);
-
-            //    Console.WriteLine($"Количество человек в группе {c.Value.Count}");
-
-            //    foreach (var v in c.Value)
-            //    {
-            //        Console.WriteLine(v);
-            //    }
-            //}
 
             return racesdict ?? new Dictionary<string, List<Person>>();
         }

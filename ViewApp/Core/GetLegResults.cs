@@ -11,7 +11,7 @@ namespace ViewApp.Core
 {
     partial class XmlModule
     {
-        public List<Person> GetLegResults(XmlDocument xDoc, List<Person> persons)
+        public (List<Person>,List<Team>) GetLegResults(XmlDocument xDoc, List<Person> persons,List<Team> teams)
         {
             xDoc.Load(filepath);
 
@@ -25,11 +25,13 @@ namespace ViewApp.Core
                     Person? currentPerson = new Person();
                     string raceId = string.Empty;
                     string id = string.Empty;
+                    int leg = 0;
                     string idAthlete = string.Empty;
                     int bib = 0;
                     string shootings = string.Empty;
                     string penalties = string.Empty;
 
+                    //Поиск в эстафетном теге LegResults
                     if (xNode.Name == "LegResults")
                     {
                         foreach (XmlElement childNode in xNode.ChildNodes)
@@ -42,45 +44,53 @@ namespace ViewApp.Core
                             {
                                 id = childNode.InnerText;
                             }
+                            if (childNode.Name == "Leg")
+                            {
+                                leg = int.Parse(childNode.InnerText);
+                            }
                             if (childNode.Name == "IdAthlete")
                             {
-                                //Ищем пользователя с таким же айдишником
-                                //currentPerson = persons.Where(x => x.IsTeam == "false").FirstOrDefault(x => x.Id == childNode.InnerText);
                                 idAthlete = childNode.InnerText;
                             }
                             if (childNode.Name == "Bib")
                             {
                                 bib = int.Parse(childNode.InnerText);
-                                //currentPerson.Bib = int.Parse(childNode.InnerText);
                             }
                             if (childNode.Name == "Shooting")
                             {
                                 shootings = childNode.InnerText;
-                                //currentPerson.Shootings = childNode.InnerText;
                             }
                             if (childNode.Name == "PenaltyLaps")
                             {
                                 penalties = childNode.InnerText;
-                                //currentPerson.PenaltyLaps = childNode.InnerText;
                             }
                         }
 
 
-
+                        //Находим спортсмена с айдишником
                         currentPerson = persons.FirstOrDefault(x => x.Id == idAthlete);
                         currentPerson.TeamId = id;
                         currentPerson.Bib = bib;
                         currentPerson.Shootings = shootings;
                         currentPerson.PenaltyLaps = penalties;
+                        currentPerson.Leg = leg;
 
                         //MessageBox.Show(currentPerson.TeamId.ToString());
 
+                        //id - команды который получает челик
+                        var teamToFind = teams.FirstOrDefault(x => x.Id == id);
+
+                        if(leg != 0 && teamToFind != null)
+                        {
+                            teamToFind.personsInTeam.Add(currentPerson);
+                        }
+                        
                         personsToAdd.Add(currentPerson);
                     }
                 }
             }
 
-            return personsToAdd ?? new List<Person>();
+            return (personsToAdd ?? new List<Person>(),teams ?? new List<Team>());
         }
     }
 }

@@ -47,7 +47,7 @@ namespace ViewApp
             //Получаем челиков команды и гонки
             (Persons,Teams) = xmlModule.GetListOfPersons(_xDoc);
             Races = xmlModule.GetListOfRaces(_xDoc);
-            PersonsByRace = xmlModule.FillRace(_xDoc, Persons, Races);
+            PersonsByRace = xmlModule.FillRace(_xDoc, Persons, Races,Teams);
 
             //Получаем уникальные названия гонок
             UniqueRaces = Races.Select(x => x.Name).Distinct().ToList();

@@ -12,6 +12,8 @@ namespace ViewApp.Models
 
         public string Id { get; set; }
         public string TeamId { get; set; }
+
+        public int Leg { get; set; }
         public int Bib { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }

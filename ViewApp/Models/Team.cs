@@ -11,5 +11,11 @@ namespace ViewApp.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string ClassId { get; set; }
+        public List<Person> personsInTeam { get; set; } = new List<Person>();
+
+        public override string ToString()
+        {
+            return $"{Id} {Name} {ClassId} Человек в данной команде: {personsInTeam.Count}";
+        }
     }
 }

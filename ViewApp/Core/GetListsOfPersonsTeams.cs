@@ -75,6 +75,7 @@ namespace ViewApp.Core
 
                             persons.Add(person);
                         }
+                        //Добавляется команда при значении тега true
                         if(isTeam == "true")
                         {
                             team.Id = id;
