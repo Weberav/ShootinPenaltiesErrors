@@ -11,7 +11,7 @@ namespace ViewApp.Core
 {
     partial class XmlModule
     {
-        public Dictionary<string, List<Person>> FillRace(XmlDocument xDoc, List<Person> persons, List<Race> races, List<Team> teams)
+        public (Dictionary<string, List<Person>>,List<Team>) FillRacesTeamsWithPersons(XmlDocument xDoc, List<Person> persons, List<Race> races, List<Team> teams)
         {
             xDoc.Load(filepath);
 
@@ -116,7 +116,7 @@ namespace ViewApp.Core
                 }
             }
 
-            return racesdict ?? new Dictionary<string, List<Person>>();
+            return (racesdict ?? new Dictionary<string, List<Person>>(),FilledTeamsWithLegPersons ?? new List<Team>());
         }
     }
 }

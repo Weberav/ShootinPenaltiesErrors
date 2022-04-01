@@ -24,6 +24,8 @@ namespace ViewApp
         public List<string>? UniqueRaces { get; set; }
         public List<Category>? Categories { get; set; }
         public Dictionary<string,List<Person>>? PersonsByRace { get; set; }
+
+        public List<Team> PersonsByTeam { get; set; }
         public List<Person>? PersonsWithErorrs { get; set; }
 
         XmlModule xmlModule = new XmlModule();
@@ -47,7 +49,8 @@ namespace ViewApp
             //Получаем челиков команды и гонки
             (Persons,Teams) = xmlModule.GetListOfPersons(_xDoc);
             Races = xmlModule.GetListOfRaces(_xDoc);
-            PersonsByRace = xmlModule.FillRace(_xDoc, Persons, Races,Teams);
+            //Получаем участников по гонкам, получаем участников в командах
+            (PersonsByRace,PersonsByTeam) = xmlModule.FillRacesTeamsWithPersons(_xDoc, Persons, Races,Teams);
 
             //Получаем уникальные названия гонок
             UniqueRaces = Races.Select(x => x.Name).Distinct().ToList();
@@ -146,14 +149,9 @@ namespace ViewApp
         /// <param name="e"></param>
         private void btn_СheckErrors_Click(object sender, EventArgs e)
         {
-            PersonsWithErorrs = xmlModule.CheckErrors(PersonsByRace);
+            PersonsWithErorrs = xmlModule.CheckErrors(PersonsByRace,PersonsByTeam);
             DisplayPersonsWithErrors();
-            DisplayRacesWithErrors();
-        }
 
-        private void DisplayRacesWithErrors()
-        {
-            
         }
 
         /// <summary>

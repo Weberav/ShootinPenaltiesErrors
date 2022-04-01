@@ -15,13 +15,13 @@ namespace ViewApp.Core
         /// <summary>
         /// Вывод в консоль всех участников с ошибками
         /// </summary>
-        /// <param name="allRacersInRaces"></param>
-        public List<Person> CheckErrors(Dictionary<string, List<Person>> allRacersInRaces)
+        /// <param name="personsByRace"></param>
+        public List<Person> CheckErrors(Dictionary<string, List<Person>> personsByRace,List<Team> personsByTeam)
         {
             List<Person> ErrorPersonList = new List<Person>();
 
             //Проверка спортсменов если количество стрельб отличается от количества вхождений на штрафной круг или наоборот
-            foreach (var key in allRacersInRaces)
+            foreach (var key in personsByRace)
             {
                 if(key.Value != null)
                 {
@@ -33,7 +33,7 @@ namespace ViewApp.Core
             }
 
             //Проверка спортсменов на различие конкретной стрельбы с конкретными показателями штрафного круга
-            foreach(var key in allRacersInRaces)
+            foreach(var key in personsByRace)
             {
                 foreach(var PersonWithErrors in key.Value)
                 {
@@ -58,7 +58,51 @@ namespace ViewApp.Core
                 }    
             }
 
-            return ErrorPersonList ?? new List<Person>();
+            //Перебираем все команды
+            foreach(var teams in personsByTeam)
+            {
+                //Если в команде количество участников не равно 0
+                if(teams.personsInTeam.Count != 0)
+                {
+                    foreach(var personError in teams.personsInTeam)
+                    {
+                        //Переводим все данные по стрельбе и штрафным кругам в массив чисел для удобного вычисления и сравнения
+                        personError.ShootingsInt = Array.ConvertAll(personError.Shootings.ToCharArray(), c => (int)Char.GetNumericValue(c));
+                        personError.PenaltyLapsInt = Array.ConvertAll(personError.PenaltyLaps.ToCharArray(), c => (int)Char.GetNumericValue(c));
+
+                        //Если количество полученных данных равно, то сравниваем
+                        if (personError.ShootingsInt.Length == personError.PenaltyLapsInt.Length)
+                        {
+                            for (int i = 0; i < personError.ShootingsInt.Length; i++)
+                            {
+                                if (personError.ShootingsInt[i] != personError.PenaltyLapsInt[i])
+                                {
+                                    if (!ErrorPersonList.Contains(personError))
+                                    {
+                                        ErrorPersonList.Add(personError);
+                                    }
+                                }
+                            }
+                        }
+                        //Если количество заполнений промахов больше заполнений штрафного круга
+                        if (personError.ShootingsInt.Length > personError.PenaltyLapsInt.Length)
+                        {
+                            ErrorPersonList.Add(personError);
+                        }
+
+                        //Если количество заполнений штрафных кругов больше количества промахов
+                        if (personError.ShootingsInt.Length < personError.PenaltyLapsInt.Length)
+                        {
+                            ErrorPersonList.Add(personError);
+                        }
+                    }
+                }
+            }
+
+            List<Person> DistinctedListWithErrors = new List<Person>();
+            DistinctedListWithErrors = ErrorPersonList.Distinct().ToList();
+
+            return DistinctedListWithErrors ?? new List<Person>();
         }
     }
 }
